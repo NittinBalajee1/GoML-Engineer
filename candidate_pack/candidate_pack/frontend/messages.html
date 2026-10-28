@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoML Engineer · Message tasks</title>
+  <link rel="stylesheet" href="/styles.css"><script defer src="/app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="GoML Engineer overview"><span class="brand-mark">G</span><span>GoML Engineer</span></a>
+    <nav class="tabs" aria-label="Main navigation">
+      <a href="/">Overview</a><a href="/placement">Placement</a><a href="/messages" aria-current="page">Messages</a><a href="/architecture">Architecture</a>
+    </nav>
+    <div id="health-pill" class="health-pill"><span class="health-dot"></span><span id="health-text">Checking local model</span></div>
+  </header>
+  <main class="page page-narrow">
+    <div class="eyebrow">WORKFLOW 02 · LOCAL LANGUAGE MODEL</div>
+    <h1 class="page-title">Message tasks</h1>
+    <p class="intro">Extract actionable requests from short messages. Message contents are processed by the local Ollama model.</p>
+    <section class="model-summary">
+      <div><span class="label">MODEL</span><strong>Qwen 2.5 3B Q4_K_M</strong></div>
+      <div><span class="label">RUNTIME</span><strong>Ollama · local</strong></div>
+      <div><span class="label">LIMIT</span><strong>50 files · 8 MB total</strong></div>
+    </section>
+    <section class="panel">
+      <h2>Select message files</h2>
+      <p class="subtle">Choose one or more UTF-8 `.txt` files. Each file should include its message headers and body.</p>
+      <label id="messages-drop" class="drop-zone" for="messages-files">
+        <input id="messages-files" type="file" accept=".txt,text/plain" multiple>
+        <strong id="messages-file-label">Choose or drop .txt files</strong>
+        <span class="subtle">Maximum 50 files · 512 KB per file</span>
+      </label>
+      <div id="selected-messages" class="selected-files" hidden></div>
+      <p id="messages-error" class="message error" role="alert" hidden></p>
+      <p id="messages-warning" class="message warning" role="status" hidden></p>
+      <button id="messages-submit" class="button" type="button" disabled>Extract tasks</button>
+    </section>
+    <section id="messages-result" class="panel results" hidden>
+      <div class="results-heading"><div><div class="eyebrow">RESULT</div><h2>Actionable tasks <span id="task-count" class="count-badge">0</span></h2></div><button id="messages-download" class="button button-secondary" type="button">Download JSON</button></div>
+      <section class="usage-panel" aria-labelledby="usage-title">
+        <div class="usage-heading"><div><div class="eyebrow">LOCAL INFERENCE</div><h3 id="usage-title">Token usage</h3></div><span id="usage-model" class="usage-model">Ollama</span></div>
+        <div class="usage-totals">
+          <div><span class="label">PROMPT TOKENS</span><strong id="usage-prompt-total">—</strong></div>
+          <div><span class="label">OUTPUT TOKENS</span><strong id="usage-output-total">—</strong></div>
+          <div><span class="label">TOTAL TIME</span><strong id="usage-time-total">—</strong></div>
+        </div>
+        <div class="table-wrap usage-table-wrap"><table><thead><tr><th>MESSAGE</th><th>RESULT</th><th>PROMPT TOKENS</th><th>OUTPUT TOKENS</th><th>TIME</th></tr></thead><tbody id="usage-rows"></tbody></table></div>
+        <p class="note">Prompt tokens include the system prompt and message payload. Output tokens count the model response. Counts come from Ollama; token usage is shown here and in the CLI log, not added to the required tasks.json schema.</p>
+      </section>
+      <div id="messages-diagnostics" class="diagnostics" hidden></div>
+      <div id="task-list" class="task-list"></div>
+    </section>
+    <p class="note">Prompt injection safeguards reduce the chance of unsupported tasks; they cannot guarantee perfect semantic extraction.</p>
+  </main>
+  <footer class="site-footer"><span>Message extraction</span><a href="/architecture">See the extraction flow</a></footer>
+</body>
+</html>

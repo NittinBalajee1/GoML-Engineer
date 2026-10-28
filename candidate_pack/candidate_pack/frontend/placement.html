@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoML Engineer · Placement</title>
+  <link rel="stylesheet" href="/styles.css"><script defer src="/app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="GoML Engineer overview"><span class="brand-mark">G</span><span>GoML Engineer</span></a>
+    <nav class="tabs" aria-label="Main navigation">
+      <a href="/">Overview</a><a href="/placement" aria-current="page">Placement</a><a href="/messages">Messages</a><a href="/architecture">Architecture</a>
+    </nav>
+    <div id="health-pill" class="health-pill"><span class="health-dot"></span><span id="health-text">Checking local model</span></div>
+  </header>
+  <main class="page page-narrow">
+    <div class="eyebrow">WORKFLOW 01 · BINARY CLASSIFICATION</div>
+    <h1 class="page-title">Student placement</h1>
+    <p class="intro">Score student records with the saved pipeline. Predictions keep the input row order.</p>
+    <section class="model-summary">
+      <div><span class="label">MODEL</span><strong>Logistic regression · C=0.3</strong></div>
+      <div><span class="label">THRESHOLD</span><strong>0.59</strong></div>
+      <div><span class="label">HOLDOUT F1</span><strong>0.5786</strong></div>
+      <div><span class="label">HOLDOUT ACCURACY</span><strong>76.4%</strong></div>
+    </section>
+    <p class="note">Holdout scores are threshold-tuned on the same split and may be optimistic. Nested CV estimates F1 0.5667; optimizing threshold for accuracy instead raises CV accuracy to 75.2% while lowering F1 to 0.4000.</p>
+    <section class="panel">
+      <h2>Upload student CSV</h2>
+      <p class="subtle">Required columns are shown below. The training target column must not be included.</p>
+      <label id="placement-drop" class="drop-zone" for="placement-file">
+        <input id="placement-file" type="file" accept=".csv,text/csv">
+        <strong id="placement-file-label">Choose or drop a CSV file</strong>
+        <span class="subtle">Maximum 12 MB</span>
+      </label>
+      <p class="label field-heading">REQUIRED COLUMNS</p>
+      <div class="field-list"><code>student_id</code><code>department</code><code>city_tier</code><code>cgpa</code><code>backlogs</code><code>internship_months</code><code>coding_score</code><code>projects</code><code>workshops</code><code>status_code</code></div>
+      <p class="note">`status_code` is required in the input but excluded from the model because its meaning and availability time are undocumented.</p>
+      <p id="placement-error" class="message error" role="alert" hidden></p>
+      <button id="placement-submit" class="button" type="button" disabled>Score students</button>
+    </section>
+    <section id="placement-result" class="panel results" hidden>
+      <div class="results-heading"><div><div class="eyebrow">RESULT</div><h2>Predictions</h2></div><button id="placement-download" class="button button-secondary" type="button">Download CSV</button></div>
+      <div class="stats"><div><span class="label">SCORED</span><strong id="stat-total">0</strong></div><div><span class="label">PLACED</span><strong id="stat-placed">0</strong></div><div><span class="label">NOT PLACED</span><strong id="stat-not-placed">0</strong></div></div>
+      <div class="table-wrap"><table><thead><tr><th>STUDENT ID</th><th>PREDICTION</th></tr></thead><tbody id="placement-rows"></tbody></table></div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>Placement scoring</span><a href="/architecture">See the model flow</a></footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoML Engineer · Overview</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="GoML Engineer overview"><span class="brand-mark">G</span><span>GoML Engineer</span></a>
+    <nav class="tabs" aria-label="Main navigation">
+      <a href="/" aria-current="page">Overview</a><a href="/placement">Placement</a><a href="/messages">Messages</a><a href="/architecture">Architecture</a>
+    </nav>
+    <div id="health-pill" class="health-pill"><span class="health-dot"></span><span id="health-text">Checking local model</span></div>
+  </header>
+  <main class="page">
+    <div class="eyebrow">LOCAL ML WORKSPACE</div>
+    <h1>Two focused tools.<br><span>One local workspace.</span></h1>
+    <p class="intro">Predict student placement outcomes or turn class messages into actionable tasks. Each workflow has its own page and keeps inference on this computer.</p>
+    <section class="tool-grid" aria-label="Workflows">
+      <a class="tool-card" href="/placement">
+        <div class="card-meta">01 <span>CLASSIFICATION</span></div>
+        <h2>Student placement</h2>
+        <p>Upload a student CSV, score it with the saved preprocessing pipeline, and download predictions.</p>
+        <div class="card-foot"><span>LOGISTIC REGRESSION · C=0.3</span><span class="arrow">→</span></div>
+      </a>
+      <a class="tool-card" href="/messages">
+        <div class="card-meta">02 <span>LOCAL LANGUAGE MODEL</span></div>
+        <h2>Message tasks</h2>
+        <p>Extract requested actions, named owners, and quoted deadlines from short text messages.</p>
+        <div class="card-foot"><span>QWEN 2.5 3B · OLLAMA</span><span class="arrow">→</span></div>
+      </a>
+    </section>
+    <section class="summary-panel" aria-label="Placement model summary">
+      <div><div class="eyebrow">PLACEMENT VALIDATION</div><h2>Student placement model</h2><p>Fixed holdout · 76.4% accuracy · threshold 0.59</p></div>
+      <a class="text-link" href="/placement">Open placement scoring <span>↗</span></a>
+    </section>
+    <p class="privacy-note"><span class="health-dot"></span> Local-only inference. Message contents are sent to the Ollama service on this computer.</p>
+  </main>
+  <footer class="site-footer"><span>GoML Engineer</span><a href="/architecture">View architecture and Mermaid diagrams</a></footer>
+</body>
+</html>

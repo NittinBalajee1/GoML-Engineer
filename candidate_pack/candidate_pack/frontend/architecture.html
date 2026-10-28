@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoML Engineer · Architecture</title>
+  <link rel="stylesheet" href="/styles.css"><script defer src="/app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="GoML Engineer overview"><span class="brand-mark">G</span><span>GoML Engineer</span></a>
+    <nav class="tabs" aria-label="Main navigation">
+      <a href="/">Overview</a><a href="/placement">Placement</a><a href="/messages">Messages</a><a href="/architecture" aria-current="page">Architecture</a>
+    </nav>
+    <div id="health-pill" class="health-pill"><span class="health-dot"></span><span id="health-text">Checking local model</span></div>
+  </header>
+  <main class="page page-narrow">
+    <div class="eyebrow">SYSTEM DESIGN</div>
+    <h1 class="page-title">Architecture</h1>
+    <p class="intro">Copy any Mermaid block into a Mermaid-compatible Markdown renderer. Full notes are in <a href="/ARCHITECTURE.md">frontend/ARCHITECTURE.md</a> in the submission folder.</p>
+    <section class="panel diagram-panel"><div class="diagram-head"><div><div class="eyebrow">01 · CLASSIFICATION</div><h2>Placement prediction</h2></div><span class="label">SAVED SKLEARN PIPELINE</span></div>
+      <pre><code>flowchart TD
+  A[Student CSV] --> B[Validate columns and IDs]
+  B --> C[Load saved pipeline and threshold]
+  C --> D[Impute, scale, and encode]
+  D --> E[Logistic regression]
+  E --> F[Apply threshold 0.59]
+  F --> G[Return student_id, placed CSV]</code></pre>
+    </section>
+    <section class="panel diagram-panel"><div class="diagram-head"><div><div class="eyebrow">02 · LOCAL LANGUAGE MODEL</div><h2>Task extraction</h2></div><span class="label">OLLAMA · QWEN 2.5 3B</span></div>
+      <pre><code>flowchart TD
+  A[Message TXT files] --> B[Parse headers and body]
+  B --> C[Delimit untrusted text]
+  C --> D[Ollama on 127.0.0.1]
+  D --> E[Qwen JSON response]
+  E --> F[Validate schema and source claims]
+  F --> G[Write tasks.json]
+  E -. invalid response .-> H[Report failure and continue]</code></pre>
+    </section>
+    <section class="panel diagram-panel"><div class="diagram-head"><div><div class="eyebrow">03 · LOCAL APPLICATION</div><h2>Browser and service</h2></div><span class="label">LOOPBACK ONLY</span></div>
+      <pre><code>flowchart LR
+  B[Browser pages] -->|local HTTP| S[Python server]
+  S --> P[Placement predictor]
+  S --> X[Message extractor]
+  X -->|127.0.0.1:11434| O[Ollama]
+  O --> Q[Local Qwen weights]
+  P --> B
+  X --> B</code></pre>
+    </section>
+  </main>
+  <footer class="site-footer"><span>Architecture</span><a href="/">Return to overview</a></footer>
+</body>
+</html>
+

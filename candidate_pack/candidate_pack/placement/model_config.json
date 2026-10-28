@@ -1,0 +1,170 @@
+{
+  "features": [
+    "department",
+    "city_tier",
+    "cgpa",
+    "backlogs",
+    "internship_months",
+    "coding_score",
+    "projects",
+    "workshops"
+  ],
+  "threshold": 0.59,
+  "random_seed": 42,
+  "validation": {
+    "method": "stratified 80/20 holdout; decision threshold selected on this validation split",
+    "test_size": 0.2,
+    "seed": 42,
+    "majority_class_accuracy_baseline": 0.7192000000000001
+  },
+  "selected_model": "logistic_regression_c0_3",
+  "model_parameters": {
+    "logistic_regression_c0_3": {
+      "C": 0.3,
+      "class_weight": "balanced"
+    },
+    "logistic_regression_c1": {
+      "C": 1.0,
+      "class_weight": "balanced"
+    }
+  },
+  "validation_results": {
+    "logistic_regression_c0_3": {
+      "f1_at_0_5": 0.56,
+      "accuracy_at_0_5": 0.692,
+      "best_threshold": 0.59,
+      "best_f1": 0.5785714285714286,
+      "accuracy_at_best_f1_threshold": 0.764,
+      "precision_at_best": 0.5785714285714286,
+      "recall_at_best": 0.5785714285714286
+    },
+    "logistic_regression_c1": {
+      "f1_at_0_5": 0.5549132947976878,
+      "accuracy_at_0_5": 0.692,
+      "best_threshold": 0.59,
+      "best_f1": 0.5765124555160143,
+      "accuracy_at_best_f1_threshold": 0.762,
+      "precision_at_best": 0.574468085106383,
+      "recall_at_best": 0.5785714285714286
+    },
+    "random_forest": {
+      "f1_at_0_5": 0.5220588235294118,
+      "accuracy_at_0_5": 0.74,
+      "best_threshold": 0.42,
+      "best_f1": 0.5538461538461539,
+      "accuracy_at_best_f1_threshold": 0.71,
+      "precision_at_best": 0.4864864864864865,
+      "recall_at_best": 0.6428571428571429
+    },
+    "extra_trees": {
+      "f1_at_0_5": 0.5273311897106109,
+      "accuracy_at_0_5": 0.706,
+      "best_threshold": 0.4,
+      "best_f1": 0.5547445255474452,
+      "accuracy_at_best_f1_threshold": 0.634,
+      "precision_at_best": 0.42066420664206644,
+      "recall_at_best": 0.8142857142857143
+    },
+    "gradient_boosting": {
+      "f1_at_0_5": 0.3431372549019608,
+      "accuracy_at_0_5": 0.732,
+      "best_threshold": 0.24,
+      "best_f1": 0.5382585751978892,
+      "accuracy_at_best_f1_threshold": 0.65,
+      "precision_at_best": 0.42677824267782427,
+      "recall_at_best": 0.7285714285714285
+    }
+  },
+  "nested_cross_validation": {
+    "logistic_regression_c0_3": {
+      "method": "nested 5-fold evaluation; threshold tuned in inner 3-fold CV",
+      "fold_f1": [
+        0.5492227979274611,
+        0.5519125683060109,
+        0.532608695652174,
+        0.5595854922279793,
+        0.64
+      ],
+      "mean_f1": 0.5666659108227251,
+      "std_f1": 0.03770898612002971,
+      "fold_accuracy_at_f1_tuned_threshold": [
+        0.652,
+        0.672,
+        0.656,
+        0.66,
+        0.766
+      ],
+      "mean_accuracy_at_f1_tuned_threshold": 0.6812,
+      "std_accuracy_at_f1_tuned_threshold": 0.042925050960948195,
+      "inner_selected_thresholds": [
+        0.4579451869845022,
+        0.45564953139120645,
+        0.48635820310784916,
+        0.4481198541867683,
+        0.5141115154457009
+      ]
+    },
+    "logistic_regression_c1": {
+      "method": "nested 5-fold evaluation; threshold tuned in inner 3-fold CV",
+      "fold_f1": [
+        0.5517241379310345,
+        0.5534246575342465,
+        0.5311653116531165,
+        0.561038961038961,
+        0.6322188449848024
+      ],
+      "mean_f1": 0.5659143826284322,
+      "std_f1": 0.034597415149661914,
+      "fold_accuracy_at_f1_tuned_threshold": [
+        0.662,
+        0.674,
+        0.654,
+        0.662,
+        0.758
+      ],
+      "mean_accuracy_at_f1_tuned_threshold": 0.682,
+      "std_accuracy_at_f1_tuned_threshold": 0.03853310265213534,
+      "inner_selected_thresholds": [
+        0.4675744434104828,
+        0.4559022678806167,
+        0.48633232423251327,
+        0.4481635177541787,
+        0.5045575901749022
+      ]
+    }
+  },
+  "nested_accuracy_threshold_comparison": {
+    "model": "logistic_regression_c0_3",
+    "method": "nested 5-fold evaluation; accuracy threshold tuned in inner 3-fold CV",
+    "fold_accuracy": [
+      0.752,
+      0.77,
+      0.722,
+      0.734,
+      0.78
+    ],
+    "mean_accuracy": 0.7516,
+    "std_accuracy": 0.02159259132202527,
+    "fold_f1": [
+      0.3673469387755102,
+      0.5064377682403434,
+      0.44176706827309237,
+      0.24,
+      0.4444444444444444
+    ],
+    "mean_f1": 0.3999992439466781,
+    "std_f1": 0.09134004329598461,
+    "inner_selected_thresholds": [
+      0.7464377041354894,
+      0.6981139112512115,
+      0.6720632931555849,
+      0.8159857795805294,
+      0.7426657322004135
+    ]
+  },
+  "training_rows": 2500,
+  "excluded_features": {
+    "student_id": "Identifier with no defensible predictive meaning; excluded to avoid memorization.",
+    "status_code": "Undocumented portal field; status=1 and status=0 placement rates are 92.1% and 2.0%, suggesting potential outcome leakage."
+  }
+}
